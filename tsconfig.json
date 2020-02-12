@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "ES6",
+      "ES7"
     ],
     "allowJs": true,
     "skipLibCheck": true,
