@@ -8,12 +8,16 @@ import {
 import {mainRouter} from './routes'
 import {Provider} from 'react-redux'
 import {store} from './redux/store'
+import Frame from './components/Frame'
+import CloseWindow from './components/CloseWindow'
 
 export default function App() {
   return (
     <Provider store={store}>
       <Suspense fallback={<div>loading...</div>}>
       <Router>
+        <Frame/>
+        <CloseWindow/>
           <Switch>
             {
               mainRouter.map(item =>{

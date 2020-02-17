@@ -17,8 +17,17 @@ function createWindow () {
     const windowOptions = {
         width: 1000,
         height: 600,
-        frame:false,
+        autoHideMenuBar: true,
+        fullscreenable: false,
+        webPreferences: {
+            javascript: true,
+            plugins: true,
+            nodeIntegration: false, // 不集成 Nodejs
+            webSecurity: false,
+            preload: path.join(__dirname, './public/renderer.js') // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
+        }
     };
+
     mainWindow = new BrowserWindow(windowOptions);
     mainWindow.loadURL("http://localhost:3000/");
     // mainWindow.loadURL(path.join('file://', __dirname, '/build/index.html'));
@@ -30,9 +39,14 @@ function createWindow () {
     ipc.on('max', function () {
         mainWindow.maximize();
     });
-    ipc.on("login",function () {
-        mainWindow.maximize();
+    ipc.on("unmax",function () {
+        console.log('unmax')
+        mainWindow.unmaximize();
     });
+    ipc.on('test',(event, args)=>{
+         console.log('主进程收到的消息是:'+args)
+         event.reply("send-return",'这里是主进程返回数据')
+    })
     //如果是--debug 打开开发者工具，窗口最大化，
     if (debug) {
         mainWindow.webContents.openDevTools();
