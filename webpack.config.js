@@ -1,15 +1,6 @@
 const path = require('path')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-
-// the path(s) that should be cleaned
-let pathsToClean = ['dist'];
-// the clean options to use
-let cleanOptions = {
-    root: path.resolve(__dirname),
-    // exclude: ['shared.js'],
-    verbose: true,
-    dry: false,
-};
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 //获取相对服务的跟路径
 const resolve = dir => {
@@ -25,26 +16,20 @@ module.exports = {
         filename: '[name].js'
     },
     resolve: {
-        alias: {
-          '@': resolve('dist/')
-        },
+        // alias: {
+        //   '@': resolve('dist/')
+        // },
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
         // modules: ['src', 'node_modules'],
-        modules: ['src'],
-        mainFields: ['module', 'browser', 'main']
+        // modules: ['src'],
+        // mainFields: ['module', 'browser', 'main']
       },
     module: {
         rules: [
-            // {
-            //     test: /\.tsx|ts?$/,
-            //     use:{
-            //         loader:'ts-loader'
-            //     }
-            // },
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                include: [resolve("./src"), resolve('../nexp.dev-lib')],
+                include: [resolve("./src")],
                 loaders: [
                   {
                     loader: 'ts-loader',
@@ -59,9 +44,39 @@ module.exports = {
                     }
                   }
                 ]
-              }
+              },
+          //加载css
+            {
+                     test: /\.css$/,
+                     use: [
+                       'style-loader',
+                       'css-loader'
+                     ]
+            },
+            //加载图片
+            {
+                     test: /\.(png|svg|jpg|gif)$/,
+                     use: [
+                       'file-loader'
+                     ]
+            },
+            //加载字体
+            {
+                     test: /\.(woff|woff2|eot|ttf|otf)$/,
+                     use: [
+                       'file-loader'
+                     ]
+                   },
+           
         ]
     },
+    devtool: 'inline-source-map',
+    plugins: [
+        new CleanWebpackPlugin(),
+              new HtmlWebpackPlugin({
+                title: 'Output Management'
+              })
+            ],
     devServer: {
         contentBase: [ resolve("dist")],
         open:false,
@@ -88,6 +103,6 @@ module.exports = {
         hot: true,
         inline: true
       },
-    // mode: 'production',
+    mode: 'production',
 
 }
