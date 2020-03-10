@@ -1,7 +1,9 @@
 import {
     Login,
     NotFound,
-    Uilet
+    Uilet,
+    Assembly,
+    GetStart
 } from '../view'
 
 //第一个主路由,
@@ -18,10 +20,13 @@ export const mainRouter = [
     }
 ]
 
-//登录后的路由
-export const adminRouter = [
+//uilet下的的路由
+export const uiletRouter = [
     {
-        path:'/login/uilet',
-        component: Uilet,
-    }
+        path:'/uilet/getstart',
+        component: GetStart,
+    }, {
+        path:'/uilet/assembly',
+        component: Assembly,
+    },
 ]

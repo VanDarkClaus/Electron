@@ -6,9 +6,13 @@
 import Login from './login'
 import NotFound from './notFound'
 import Uilet from './uilet'
+import Assembly from './uilet/assembly'
+import GetStart from './uilet/getStart'
 
 export {
     Login,
     NotFound,
-    Uilet
+    Uilet,
+    Assembly,
+    GetStart
 }

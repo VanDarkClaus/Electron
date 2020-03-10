@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { Route, Redirect,Switch, RouteComponentProps, withRouter } from 'react-router'
-import {adminRouter} from '../../router'
-import DesktopLeft from '../../components/desktop-left'
+// import { Route, Redirect,Switch, RouteComponentProps, withRouter } from 'react-router'
 import { Paper, Box, Typography } from "@material-ui/core";
 import useStyle from './login.jss'
 import moment from 'moment'
-// import './login.css'
+import './login.css'
 
 interface Props{
     [a:string]:any
@@ -41,10 +39,10 @@ const  Index:React.SFC<Props> = (props) =>  {
             default: return '星期天'
         }
     }
-    const goPage = (path:string) =>{
-        // setRoute(path)
-        props.history.push(path)
-    }
+    // const goPage = (path:string) =>{
+    //     // setRoute(path)
+    //     props.history.push(path)
+    // }
         return (
             <Paper className={classes.root}>
                 {

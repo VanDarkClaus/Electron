@@ -1,46 +1,24 @@
-import React, { Component } from "react";
-// import { Route, Redirect,Switch, RouteComponentProps, withRouter } from 'react-router'
-import {
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Image,
-  Label,
-  Icon
-} from "semantic-ui-react";
+import React from "react";
+import { Route, Redirect,Switch } from 'react-router'
+import {uiletRouter} from '../../router'
 import DesktopLeft from "../../components/desktop-left";
+
 
 interface Props {
   [a: string]: any;
 }
 
 const Index: React.SFC<Props> = props => {
-  const loginOut = async () => {
-    await localStorage.clear();
-    props.history.push("/");
-  };
+  
   return (
     <DesktopLeft>
-      <Grid style={{ width: "100%", height: "100%" }}>
-        <Grid.Column width={10}>
-          <Label
-            style={{
-              width: "100%",
-              height: "100%",
-              position: "relative",
-              background: "#fff",
-              boxShadow: "0 1px 2px #ccc"
-            }}
-          >
-            <Icon name="mail" /> 23
-          </Label>
-        </Grid.Column>
-        <Grid.Column width={6}>
-          <Button onClick={loginOut}>tuichu</Button>
-        </Grid.Column>
-      </Grid>
+     <Switch>
+       {uiletRouter.map(item =>{
+         return <Route key={item.path} component={item.component} path={item.path}/>
+       })}
+       <Redirect from='/uilet' to='/uilet/getstart' exact/>
+       <Redirect to='/404' />
+     </Switch>
     </DesktopLeft>
   );
 };
