@@ -31,13 +31,15 @@ const Index: React.SFC<Props> = props => {
               height: "100%",
               position: "relative",
               background: "#fff",
-              "box-shadow": "0 1px 2px #ccc"
+              boxShadow: "0 1px 2px #ccc"
             }}
           >
             <Icon name="mail" /> 23
           </Label>
         </Grid.Column>
-        <Grid.Column width={6}>sss</Grid.Column>
+        <Grid.Column width={6}>
+          <Button onClick={loginOut}>tuichu</Button>
+        </Grid.Column>
       </Grid>
     </DesktopLeft>
   );
